@@ -2,30 +2,41 @@
 
 ## Description
 
-This is an application that takes user input and generates a Team Profile web page 
+This is an application that interfaces with a MySQL database to build a relatioship between emloyees, departments and their roles 
 
-The user is asked questions that will generate the content of the readme.
-- There are 3 types of employees that are can be created to add to the team.
-    - Manager, this employee type is the first one asked for and only 1 can be created.
-        - The properties required are Name, ID, email and Office Number
-    - Engineer, this employee type is created through the selection list and any number can be created.
-        - The properties required are Name, ID, email and gitHub Name
-    - Intern, this employee type is created through the selection list and any number can be created.
-        - The properties required are Name, ID, email and School
+Through the main menu, the user is asked what they woud like to do.
+- There are several options
+    - view all departments, 
+    - view all roles, 
+    - view all employees, 
+    - add a department, 
+    - add a role, 
+    - add an employee, 
+    - update an employee role, 
+    - update employee managers, 
+    - view employees by manager, 
+    - view employees by department, 
+    - delete a department, 
+    - delete a role, 
+    - delete an employee, 
+    - view department utilization
+
 <br>
 
 ## Table of Contents
 
 - [GitHub Link](#link)
 - [Installation Instructions](#install-instructions)
-- [Executing Instructions](#)
+- [Executing Instructions](#executing-instructions)
+- [Database Information](#database-information)
 - [Video Demo](#video-demo)
+- [Screen Shots](#screen-shots)
 ---
 
 ## Link
 
 The link to the GitHub repository of the assignment is <br>
-[https://github.com/jkoufalas/Team-Profile-Generator](https://github.com/jkoufalas/Team-Profile-Generator)
+[https://github.com/jkoufalas/Employee-Tracker](https://github.com/jkoufalas/Employee-Tracker)
 
 ---
 
@@ -33,7 +44,8 @@ The link to the GitHub repository of the assignment is <br>
 
 The dependancies are listed within the package.json file. The dependancies for this application are
  - inquirer@8.2.4
- - jest
+ - dotenv
+ - mysql2
 
 Since the dependancies are listed within the lock file, they will autmatically installed with the following command
 
@@ -48,12 +60,35 @@ npm i
 node index.js
 ```
 
-Follow the prompts to include the information for your team.
+Utilize the command prompts and the application will prompt you for any information it needs to fullfill the requests you have made.
+
+---
+
+## Database Information
+The user must have a MySQL database installed on the machine they are running the application on.
+
+The schema for the database is included in the db folder and can be included by running the command
+```
+mysql> source db/schema.sql
+```
+
+The seed data if required can be inserted into the database by using the seeds.sql file in the db folder and inserted by running the command.
+```
+mysql> source db/seeds.sql
+```
+
+The information used to connect to the database is currently implemented with the dotenv package. To include the correct information to connect to the database corretly the following the user needs to create a .env file and add the following data.
+```
+    DB_NAME="employee_tracker_db"
+    DB_PASSWORD="your_password"
+    DB_USER="your_user"
+```
+If the user doesn't want to use the dotenv package, then they can simply replace these variable in the server.js file with the hard coded values that these variables are storing.
 
 ---
 ## Video Demo
 
-[Link to Demo](https://youtu.be/12_rirfDNJk)
+[Link to Demo](https://youtu.be/vhIIxC-qzC0)
 
 Select the 1080p option for better resolution of text.
 
@@ -61,10 +96,10 @@ The demonstration video covers the following.
 - The install instructions.
 - How to run the application.
 - A walkthrough of the application and sample responses to questions.
-- Where to find the HTML file once generated.
-- The HTML that is generated run within a browser.
 ---
 
-## Sample HTML
+## Screen Shots
 
-A sample of a generated index.html can be located in the ./dist folder named index.html This is the file generated in the Demo video link.
+![A picture of the home page](./assets/images/homescreen.png)
+
+---

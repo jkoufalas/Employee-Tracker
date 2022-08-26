@@ -6,12 +6,13 @@ require('dotenv').config();
 
 //setup basic querys to print tables
 const queryDeparments = "SELECT * FROM department";
-const queryRoles = `SELECT role.id, title, department.name "department", salary FROM role
-join department where department.id = role.department_id`;
+const queryRoles = `SELECT role.id, role.title, department.name "department", role.salary 
+FROM role
+left join department ON department.id = role.department_id`;
 const queryEmployee = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name "department", role.salary ,CONCAT( manager.first_name, " ", manager.last_name) AS "manager"
 FROM employee
-join role ON role.id = employee.role_id
-join department ON department.id = role.department_id
+left join role ON role.id = employee.role_id
+left join department ON department.id = role.department_id
 left join employee as manager on manager.id = employee.manager_id`;
 
 //application title
@@ -40,6 +41,13 @@ var employeeArray;
 var managerArray;
 
 //setup connection to mysql database
+/*
+    dotenv package used, create a .env file
+    and add the lines within 
+    DB_NAME="employee_tracker_db"
+    DB_PASSWORD="your_password"
+    DB_USER="your_user"
+*/
 const db = mysql.createConnection(
   {
     host: 'localhost',
